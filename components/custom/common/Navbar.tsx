@@ -9,18 +9,18 @@ export function Navbar() {
     const router = useRouter();
     const navItems = [
         { label: "Home", href: "#" },
-        { label: "Product", href: "#" },
-        { label: "FAQ", href: "#" },
+        { label: "Communities", href: "#" },
+        { label: "Courses", href: "#" },
         { label: "Blog", href: "#" },
         { label: "About Us", href: "#" },
     ];
 
     return (
-        <nav className="px-8 py-6 sticky top-0 bg-slate-50 z-50 border-b border-slate-200">
+        <nav className="px-8 py-6 sticky top-0 bg-blue-100/80 backdrop-blur-md z-50 border-b border-blue-200">
             <div className="flex items-center justify-between max-w-[90%] mx-auto">
                 {/* Logo */}
                 <Link href="/" className="text-3xl font-bold text-primary flex items-center">
-                    <Image src="/images/logo.png" height={100} width={50} alt="test" />
+                    <Image src="/images/logo.png" height={100} width={50} alt="Grasp Logo" />
                     <span className="pt-4">Grasp</span>
                 </Link>
 
@@ -30,7 +30,7 @@ export function Navbar() {
                         <Link
                             key={item.label}
                             href={item.href}
-                            className="text-gray-600 hover:text-teal-600 transition-colors hove:scale-105 duration-300"
+                            className="text-gray-600 hover:text-blue-600 transition-colors duration-300 relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bg-blue-600 after:left-0 after:bottom-[-4px] after:transition-all after:duration-300 hover:after:w-full"
                         >
                             {item.label}
                         </Link>
@@ -42,12 +42,13 @@ export function Navbar() {
                     <Button
                         onClick={() => router.push("auth/login")}
                         variant="outline"
-                        className="bg-slate-100 text-teal-600 hover:text-teal-600 border border-teal-500 cursor-pointer hover:scale-105 duration-300"
+                        size="lg"
+                        className="bg-blue-100 hover:bg-blue-100 text-primary py-5 px-6  border border-primary cursor-pointer hover:scale-105 duration-300 rounded-md"
                     >
                         Login
                     </Button>
-                    <Button className="bg-teal-500 hover:bg-teal-600 text-white rounded-md px-6 py-2 cursor-pointer hover:scale-105 duration-300">
-                        Get Started
+                    <Button size="lg" className="bg-primary hover:bg-primary/80 text-white rounded-md px-6 py-5 cursor-pointer hover:scale-105 duration-300">
+                        Join Free
                     </Button>
                 </div>
             </div>

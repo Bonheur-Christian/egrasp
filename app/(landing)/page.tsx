@@ -1,6 +1,8 @@
 "use client";
 
 import { Navbar } from "@/components/custom/common/Navbar";
+import HeroSection from "@/components/custom/landingpage/HeroSection";
+import SuccessSection from "@/components/custom/landingpage/OurSuccess";
 import { useEffect } from "react";
 
 export default function LandingPage() {
@@ -9,9 +11,11 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <div className="min-h-screen">
       <Navbar />
-    
+      <HeroSection />
+      <SuccessSection />
+
     </div>
   );
 }
