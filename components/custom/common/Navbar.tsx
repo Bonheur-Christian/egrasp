@@ -4,15 +4,18 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next13-progressbar";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export function Navbar() {
     const router = useRouter();
+    const pathname = usePathname();
+    
     const navItems = [
-        { label: "Home", href: "#" },
-        { label: "Communities", href: "#" },
-        { label: "Courses", href: "#" },
-        { label: "Blog", href: "#" },
-        { label: "About Us", href: "#" },
+        { label: "Home", href: "/" },
+        { label: "Communities", href: "/communities" },
+        { label: "Courses", href: "/courses" },
+        { label: "Blog", href: "/blog" },
+        { label: "About Us", href: "/about-us" },
     ];
 
     return (
@@ -26,15 +29,24 @@ export function Navbar() {
 
                 {/* Center Navigation Menu */}
                 <div className="hidden md:flex items-center gap-8">
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.label}
-                            href={item.href}
-                            className="text-gray-600 hover:text-blue-600 transition-colors duration-300 relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bg-blue-600 after:left-0 after:bottom-[-4px] after:transition-all after:duration-300 hover:after:w-full"
-                        >
-                            {item.label}
-                        </Link>
-                    ))}
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.href || 
+                            (item.href !== "/" && pathname?.startsWith(item.href));
+                        
+                        return (
+                            <Link
+                                key={item.label}
+                                href={item.href}
+                                className={`text-gray-600 hover:text-blue-600 transition-colors duration-300 relative after:content-[''] after:absolute after:h-[2px] after:bg-blue-600 after:left-0 after:bottom-[-4px] after:transition-all after:duration-300 ${
+                                    isActive 
+                                        ? 'after:w-full text-blue-600' 
+                                        : 'after:w-0 hover:after:w-full'
+                                }`}
+                            >
+                                {item.label}
+                            </Link>
+                        );
+                    })}
                 </div>
 
                 {/* Right Side - Login and Sign Up */}
@@ -43,7 +55,7 @@ export function Navbar() {
                         onClick={() => router.push("auth/login")}
                         variant="outline"
                         size="lg"
-                        className="bg-blue-100 hover:bg-blue-100 text-primary py-5 px-6  border border-primary cursor-pointer hover:scale-105 duration-300 rounded-md"
+                        className="bg-blue-100 hover:bg-blue-100 text-primary py-5 px-6 border border-primary cursor-pointer hover:scale-105 duration-300 rounded-md"
                     >
                         Login
                     </Button>
