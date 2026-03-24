@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff } from "lucide-react";
-import Image from "next/image";
+import AuthImageCarousel from "@/components/custom/common/AuthImageCarousel";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function LoginPage() {
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
@@ -17,24 +18,12 @@ export default function LoginPage() {
 
   const handleSubmit = () => {};
 
+
+
+
   return (
     <div className="w-full bg-slate-50 flex flex-col md:flex-row max-h-screen">
-      {/* Left side - Image */}
-      <div className="md:w-1/2 relative ">
-        <div className="absolute inset-0"></div>
-        <Image
-          src="/images/login.png"
-          alt="Students in classroom"
-          width={400}
-          height={400}
-          className="h-full w-full object-cover"
-        />
-        <div className="absolute bottom-8 left-8 text-white z-10">
-          <h2 className="text-4xl font-bold mb-2">Lorem Ipsum is simply</h2>
-          <p className="text-lg opacity-90">Lorem Ipsum is simply</p>
-        </div>
-      </div>
-
+      <AuthImageCarousel />
       {/* Right side - Form */}
       <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
         <div className="max-w-md mx-auto w-full">
@@ -67,6 +56,21 @@ export default function LoginPage() {
               Register
             </Button>
           </div>
+
+          <Tabs>
+            <TabsList>
+              <TabsTrigger value="login">Login</TabsTrigger>
+              <TabsTrigger value="register">Register</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="login">
+              {/* Login form content */}
+            </TabsContent>
+
+            <TabsContent value="register">
+              {/* Register form content */}
+            </TabsContent>
+          </Tabs>
 
           <p className="text-gray-600 text-sm mb-8 leading-relaxed">
             Lorem Ipsum is simply dummy text of the printing and typesetting
