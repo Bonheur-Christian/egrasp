@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Providers from "@/components/custom/common/LoaderProvider";
 
 const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
@@ -24,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("font-mono", jetbrainsMono.variable)}>
       <body className={`${poppins.variable} antialiased`}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

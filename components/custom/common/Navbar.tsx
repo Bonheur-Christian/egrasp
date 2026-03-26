@@ -52,7 +52,7 @@ export function Navbar() {
                 {/* Right Side - Login and Sign Up */}
                 <div className="flex items-center gap-4">
                     <Button
-                        onClick={() => router.push("auth/login")}
+                        onClick={() => router.push("auth")}
                         variant="outline"
                         size="lg"
                         className="bg-blue-100 hover:bg-blue-100 text-primary py-5 px-6 border border-primary cursor-pointer hover:scale-105 duration-300 rounded-md"

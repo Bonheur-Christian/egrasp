@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -66,14 +67,16 @@ export default function LoginForm() {
           <span className="text-sm">Remember me</span>
         </div>
 
-        <button type="button" className="text-sm text-teal-500">
+        <Link href="#" className="text-sm text-primary">
           Forgot Password?
-        </button>
+        </Link>
       </div>
 
-      <Button className="w-full py-6 rounded-full bg-teal-400 hover:bg-teal-500">
-        Login
-      </Button>
+      <div className="flex justify-center pt-12">
+        <Button className="w-1/2 mx-auto py-6 rounded-md bg-primary hover:bg-primary/90 text-white text-lg cursor-pointer hover:scale-90">
+          Login
+        </Button>
+      </div>
     </form>
   );
 }

@@ -107,7 +107,7 @@ export default function SuccessSection() {
           ))}
         </div>
       </div>
-      <div className="flex gap-12 py-32 maxxl mx-auto items-center">
+      <div className="flex gap-12 py-32  mx-auto items-center">
         <div className="w-full space-y-8 relative">
           {/* Animated circle */}
           <div className="absolute -top-4 -left-4">

@@ -19,7 +19,7 @@ export default function SignupForm() {
         <Input
           id="name"
           placeholder="Enter your full name"
-          className="py-6 rounded-xl"
+          className="py-6 rounded-lg"
         />
       </div>
 
@@ -30,7 +30,7 @@ export default function SignupForm() {
           id="email"
           type="email"
           placeholder="Enter your email"
-          className="py-6 rounded-xl"
+          className="py-6 rounded-lg"
         />
       </div>
 
@@ -41,32 +41,15 @@ export default function SignupForm() {
           id="password"
           type="password"
           placeholder="Create a password"
-          className="py-6 rounded-xl"
+          className="py-6 rounded-lg"
         />
       </div>
 
-      {/* Confirm Password */}
-      <div className="space-y-2">
-        <Label htmlFor="confirm-password">Confirm Password</Label>
-        <Input
-          id="confirm-password"
-          type="password"
-          placeholder="Confirm your password"
-          className="py-6 rounded-xl"
-        />
+      <div className="flex justify-center pt-12">
+        <Button className="w-1/2 mx-auto py-6 rounded-md bg-primary hover:bg-primary/90 text-white text-lg cursor-pointer hover:scale-90">
+          Sign Up
+        </Button>
       </div>
-
-      {/* Terms */}
-      <div className="flex items-center gap-2">
-        <Checkbox id="terms" />
-        <label htmlFor="terms" className="text-sm">
-          I agree to the Terms & Conditions
-        </label>
-      </div>
-
-      <Button className="w-full py-6 rounded-full bg-teal-400 hover:bg-teal-500">
-        Create Account
-      </Button>
     </form>
   );
 }
