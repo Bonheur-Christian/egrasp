@@ -1,0 +1,34 @@
+export const CATEGORIES = [
+  "Technology", "Business", "Sports", "Music", "Health", "Gaming", "Education", "Art", "Science", "Travel"
+] as const;
+
+export type Category = typeof CATEGORIES[number];
+
+export interface Community {
+  id: string;
+  name: string;
+  description: string;
+  avatar: string;
+  category: Category;
+  members: number;
+  type: "public" | "private";
+  trending: boolean;
+  createdAt: string;
+  activity: number; 
+}
+
+
+export const communities: Community[] = [
+  { id: "1", name: "Frontend Devs", description: "A community for frontend developers to share tips, tools, and trends.", avatar: "FD", category: "Technology", members: 12400, type: "public", trending: true, createdAt: "2024-01-15", activity: 320 },
+  { id: "2", name: "Startup Founders", description: "Connect with fellow founders, share wins, and get advice.", avatar: "SF", category: "Business", members: 8700, type: "public", trending: true, createdAt: "2024-03-10", activity: 210 },
+  { id: "3", name: "Football Fanatics", description: "Everything football — match discussions, transfers, and more.",  avatar: "FF", category: "Sports", members: 23100, type: "public", trending: true, createdAt: "2023-11-01", activity: 540 },
+  { id: "4", name: "Indie Music Lovers", description: "Discover and share indie music from around the world.",  avatar: "IM", category: "Music", members: 6200, type: "public", trending: false, createdAt: "2024-06-20", activity: 150 },
+  { id: "5", name: "Fitness & Wellness", description: "Your daily dose of fitness motivation and health tips.", avatar: "FW", category: "Health", members: 15800, type: "public", trending: true, createdAt: "2024-02-05", activity: 280 },
+  { id: "6", name: "PC Gamers United", description: "Reviews, builds, and multiplayer matchmaking for PC gamers.",  avatar: "PG", category: "Gaming", members: 19300, type: "public", trending: true, createdAt: "2023-09-12", activity: 460 },
+  { id: "7", name: "Learn & Grow", description: "Resources and study groups for lifelong learners.",  avatar: "LG", category: "Education", members: 9400, type: "public", trending: false, createdAt: "2024-04-18", activity: 190 },
+  { id: "8", name: "Digital Art Hub", description: "Showcase your digital art and get constructive feedback.",  avatar: "DA", category: "Art", members: 7100, type: "public", trending: false, createdAt: "2024-07-02", activity: 130 },
+  { id: "9", name: "Space Explorers", description: "Discuss the latest in space science and astronomy.",  avatar: "SE", category: "Science", members: 11200, type: "public", trending: true, createdAt: "2024-01-30", activity: 250 },
+  { id: "10", name: "Wanderlust Club", description: "Travel stories, itineraries, and hidden gems worldwide.", avatar: "WC", category: "Travel", members: 14600, type: "public", trending: false, createdAt: "2024-05-11", activity: 200 },
+  { id: "11", name: "AI Researchers", description: "Cutting-edge AI research discussions and paper reviews.",  avatar: "AR", category: "Technology", members: 5300, type: "private", trending: false, createdAt: "2025-01-08", activity: 170 },
+  { id: "12", name: "E-Commerce Masters", description: "Strategies and tools for scaling your online store.", avatar: "EC", category: "Business", members: 4100, type: "private", trending: false, createdAt: "2025-02-14", activity: 90 },
+];
