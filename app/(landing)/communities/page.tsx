@@ -23,7 +23,6 @@ import Autoplay from "embla-carousel-autoplay";
 import { CommunityCard } from "@/components/custom/landingPage/CommunityCard";
 import { communities, CATEGORIES } from "@/constants/communities";
 import Image from "next/image";
-import { Navbar } from "@/components/custom/common/Navbar";
 
 type SortKey = "trending" | "members" | "newest" | "active";
 type TypeFilter = "all" | "public" | "private";
@@ -85,7 +84,6 @@ export default function Communities() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Navbar/>
       <section className="relative overflow-hidden bg-primary">
         <Image
           src="/images/community.png"

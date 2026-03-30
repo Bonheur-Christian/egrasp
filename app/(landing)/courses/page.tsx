@@ -16,7 +16,6 @@ import Autoplay from "embla-carousel-autoplay";
 import { CourseCard } from "@/components/custom/landingPage/CourseCard";
 import { courses, COURSE_CATEGORIES } from "@/constants/courses";
 import Image from "next/image";
-import { Navbar } from "@/components/custom/common/Navbar";
 
 type SortKey = "trending" | "rating" | "newest" | "popular";
 type PriceFilter = "all" | "free" | "paid";
@@ -78,10 +77,9 @@ export default function Courses() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Navbar />
-      <section className="relative overflow-hidden bg-primary">
+      <section className="relative overflow-hidden bg-primary/80">
         <Image
-          src="/images/community.png"
+          src="/images/courses.jpg"
           alt=""
           className="absolute inset-0 w-full h-full object-cover opacity-20"
           width={1920}

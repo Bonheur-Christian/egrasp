@@ -14,7 +14,7 @@ export function Navbar() {
     { label: "Home", href: "/" },
     { label: "Communities", href: "/communities" },
     { label: "Courses", href: "/courses" },
-    { label: "Blog", href: "/blog" },
+    { label: "Blog", href: "/blogs" },
     { label: "About Us", href: "/about-us" },
   ];
 
