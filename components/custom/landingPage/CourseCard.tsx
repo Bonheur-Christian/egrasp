@@ -1,105 +1,99 @@
-'use client';
+import { Star, Clock, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import type { Course } from "@/constants/courses";
+import Image from "next/image";
 
-import { useState } from 'react';
-import { Star, Clock, Users, Badge } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-
-interface CourseCardProps {
-  course: {
-    id: number;
-    title: string;
-    instructor: string;
-    category: string;
-    level: string;
-    rating: number;
-    reviews: number;
-    duration: string;
-    students: number;
-    price: number;
-    image: string;
-    description: string;
-    bestseller: boolean;
-  };
+function formatCount(n: number) {
+  return n >= 1000
+    ? `${(n / 1000).toFixed(1).replace(/\.0$/, "")}k`
+    : String(n);
 }
 
-export default function CourseCard({ course }: CourseCardProps) {
-  const [isBookmarked, setIsBookmarked] = useState(false);
-
+function renderStars(rating: number) {
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden group">
-      {/* Image/Banner */}
-      <div className="relative h-40 overflow-hidden bg-gradient-to-br from-slate-200 to-slate-300">
-        <div
-          className="absolute inset-0 opacity-90"
-          style={{ background: course.image }}
+    <div className="flex items-center gap-1">
+      {[...Array(5)].map((_, i) => (
+        <Star
+          key={i}
+          className={`h-3 w-3 ${
+            i < Math.floor(rating)
+              ? "fill-yellow-400 text-yellow-400"
+              : "text-muted-foreground"
+          }`}
         />
+      ))}
+    </div>
+  );
+}
 
-        {course.bestseller && (
-          <div className="absolute top-3 right-3 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-            <Badge className="h-3 w-3" />
-            Bestseller
-          </div>
-        )}
-
-        <div className="absolute top-3 left-3 bg-slate-800 bg-opacity-70 text-white px-3 py-1 rounded text-xs font-medium">
-          {course.level}
-        </div>
+export function CourseCard({ course }: { course: Course }) {
+  return (
+    <div className="group rounded-xl border border-border bg-card overflow-hidden">
+      <div className="h-28 overflow-hidden relative">
+        <Image
+          src="/images/community-profile.jpeg"
+          alt={course.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+          width={600}
+          height={200}
+        />
       </div>
 
-      {/* Content */}
-      <div className="p-5 flex flex-col h-full">
-        {/* Title and Category */}
-        <div className="mb-3">
-          <p className="text-xs text-indigo-600 font-semibold uppercase tracking-wide mb-1">
-            {course.category}
-          </p>
-          <h3 className="text-lg font-bold text-slate-900 line-clamp-2 group-hover:text-indigo-600 transition-colors">
-            {course.title}
-          </h3>
+      <div className="p-4 -mt-6 relative">
+        <div className="w-12 h-12 rounded-md bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-md border-2 border-card">
+          {course.avatar}
         </div>
 
-        {/* Instructor */}
-        <p className="text-sm text-slate-600 mb-4 flex-grow">{course.instructor}</p>
+        <h3 className="font-semibold text-foreground mt-2 text-base leading-tight">
+          {course.name}
+        </h3>
 
-        {/* Rating */}
-        <div className="flex items-center gap-2 mb-4">
+        <p className="text-muted-foreground text-xs mt-1 line-clamp-1">
+          by {course.instructor}
+        </p>
+
+        <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
+          {course.description}
+        </p>
+
+        <div className="flex items-center justify-between mt-3 mb-3">
+          <div className="flex items-center gap-2">
+            <Badge variant="secondary" className="text-xs">
+              {course.category}
+            </Badge>
+            <span className="text-xs text-muted-foreground flex items-center gap-1">
+              <Clock className="h-3 w-3" /> {course.duration}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-1">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`h-4 w-4 ${
-                  i < Math.floor(course.rating)
-                    ? 'fill-amber-400 text-amber-400'
-                    : 'text-slate-300'
-                }`}
-              />
-            ))}
+            {renderStars(course.rating)}
+            <span className="text-xs font-semibold text-foreground ml-1">
+              {course.rating}
+            </span>
           </div>
-          <span className="text-sm font-semibold text-slate-900">
-            {course.rating}
+          <span className="text-xs text-muted-foreground flex items-center gap-1">
+            <Users className="h-3 w-3" /> {formatCount(course.students)}
           </span>
-          <span className="text-xs text-slate-500">({course.reviews})</span>
         </div>
 
-        {/* Meta Info */}
-        <div className="grid grid-cols-2 gap-3 mb-4 text-sm">
-          <div className="flex items-center gap-2 text-slate-600">
-            <Clock className="h-4 w-4" />
-            <span>{course.duration}</span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-600">
-            <Users className="h-4 w-4" />
-            <span>{(course.students / 1000).toFixed(1)}k</span>
+        <div className="flex justify-between items-center">
+          <div className="text-lg font-bold text-primary">
+            {course.type === "free" ? "Free" : `$${course.price}`}
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-          <div className="text-xl font-bold text-slate-900">
-            ${course.price}
-          </div>
-          <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
-            Enroll
+        <div className="flex justify-center">
+          <Button
+            className="mt-3 px-12 rounded-md cursor-pointer hover:scale-90 duration-300 transition-all border border-primary"
+            size="lg"
+            variant="default"
+          >
+            Enroll Now
           </Button>
         </div>
       </div>
