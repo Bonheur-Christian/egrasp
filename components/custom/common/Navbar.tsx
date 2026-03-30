@@ -13,7 +13,7 @@ export function Navbar() {
   const navItems = [
     { label: "Home", href: "/" },
     { label: "Communities", href: "/communities" },
-    { label: "Courses", href: "/courses" },
+    // { label: "Courses", href: "/courses" },
     { label: "Blog", href: "/blogs" },
     { label: "About Us", href: "/about-us" },
   ];
