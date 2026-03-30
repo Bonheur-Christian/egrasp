@@ -52,11 +52,11 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Footer Links */}
             <div className="flex items-center gap-6 text-sm text-gray-300">
-              <Link href="/careers">Careers</Link>
+              <Link href="/communities">Communities</Link>
               <span className="text-white">|</span>
               <Link href="/privacy-policy">Privacy Policy</Link>
               <span className="text-white">|</span>
-              <Link href="/terms">Terms & Conditions</Link>
+              <Link href="/blogs">Blogs</Link>
             </div>
 
             {/* Copyright */}

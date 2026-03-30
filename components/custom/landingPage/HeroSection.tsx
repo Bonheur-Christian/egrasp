@@ -1,7 +1,11 @@
+"use client";
+
+import { useRouter } from "next13-progressbar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default function HeroSection() {
+    const router = useRouter();
     return (
         <div className="bg-blue-100 rounded-br-[15vw] rounded-bl-[15vw]">
             <div className="max-w-[90%] mx-auto px-12 py-16 relative overflow-hidden min-h-[600px]">
@@ -23,6 +27,7 @@ export default function HeroSection() {
                         </p>
                         <div className="flex gap-6 items-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
                             <Button
+                            onClick={()=> router.push("/auth")}
                                 size="lg"
                                 className="text-white rounded-md p-6 text-md hover:bg-primary-80 cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30 duration-300 transition-all relative overflow-hidden group"
                             >
@@ -30,6 +35,7 @@ export default function HeroSection() {
                                 <span className="absolute inset-0  transition-opacity duration-300"></span>
                             </Button>
                             <Button
+                                onClick={()=> router.push("/communities")}
                                 size="lg"
                                 variant="outline"
                                 className="text-primary bg-slate-50 border border-primary rounded-md p-6 text-md cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 duration-300 transition-all relative overflow-hidden group"

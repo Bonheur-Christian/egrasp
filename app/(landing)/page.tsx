@@ -15,12 +15,10 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
       <HeroSection />
       <SuccessSection />
       <Features />
       <NewsSection />
-      <Footer />
     </div>
   );
 }
