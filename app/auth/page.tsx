@@ -47,9 +47,9 @@ export default function LoginPage() {
                 src="/images/logo.png"
                 height={100}
                 width={100}
-                alt="Grasp Logo"
+                alt="eGrasp Logo"
               />
-              <span className="pt-8">Grasp</span>
+              <span className="pt-8">eGrasp</span>
             </Link>
             {activeTab === "login" && (
               <p className="text-gray-500 text-sm">

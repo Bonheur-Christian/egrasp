@@ -78,7 +78,7 @@ export default function SuccessSection() {
             All-In-One <span className="text-orange-500">Cloud Software.</span>
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-            Grasp is one powerful online software suite that combines all the
+            eGrasp is one powerful online software suite that combines all the
             tools needed to run a successful school or office.
           </p>
         </div>
@@ -117,10 +117,10 @@ export default function SuccessSection() {
 
           <h2 className="text-4xl relative z-10 text-primary font-bold">
             Everything you can do in a physical classroom,{" "}
-            <span className="px-2 text-orange-500">you can do with Grasp</span>
+            <span className="px-2 text-orange-500">you can do with eGrasp</span>
           </h2>
           <p className="text-gray-600 text-lg relative z-10">
-            Grasp’s school management software helps traditional and online
+            eGrasp’s school management software helps traditional and online
             schools manage scheduling, attendance, payments and virtual
             classrooms all in one secure cloud-based system.
           </p>

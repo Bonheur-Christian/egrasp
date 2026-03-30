@@ -30,9 +30,9 @@ export function Navbar() {
             src="/images/logo.png"
             height={100}
             width={50}
-            alt="Grasp Logo"
+            alt="eGrasp Logo"
           />
-          <span className="pt-4">Grasp</span>
+          <span className="pt-4">eGrasp</span>
         </Link>
 
         {/* Center Navigation Menu */}

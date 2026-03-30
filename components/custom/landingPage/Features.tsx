@@ -75,7 +75,7 @@ export default function Features() {
                 for Teachers and Learners
               </h2>
               <p className="text-gray-600 text-lg relative z-10">
-                Grasp’s school management software helps traditional and online
+                eGrasp’s school management software helps traditional and online
                 schools manage scheduling, attendance, payments and virtual
                 classrooms all in one secure cloud-based system.
               </p>
@@ -111,7 +111,7 @@ export default function Features() {
                 Tests
               </h2>
               <p className="text-gray-600 text-lg relative z-10">
-                Grasp’s school management software helps traditional and online
+                eGrasp’s school management software helps traditional and online
                 schools manage scheduling, attendance, payments and virtual
                 classrooms all in one secure cloud-based system.
               </p>
@@ -128,7 +128,7 @@ export default function Features() {
                 Tools for Educators
               </h2>
               <p className="text-gray-600 text-lg relative z-10">
-                Grasp’s school management software helps traditional and online
+                eGrasp’s school management software helps traditional and online
                 schools manage scheduling, attendance, payments and virtual
                 classrooms all in one secure cloud-based system.
               </p>
@@ -163,7 +163,7 @@ export default function Features() {
                 <span className="text-orange-500">Discussions</span>
               </h2>
               <p className="text-gray-600 text-lg relative z-10">
-                Grasp’s school management software helps traditional and online
+                eGrasp’s school management software helps traditional and online
                 schools manage scheduling, attendance, payments and virtual
                 classrooms all in one secure cloud-based system.
               </p>

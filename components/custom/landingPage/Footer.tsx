@@ -16,9 +16,9 @@ export function Footer() {
               src="/images/white-logo.png"
               width={80}
               height={100}
-              alt="Grasp Logo"
+              alt="eGrasp Logo"
             />
-            <span className="text-2xl font-bold text-white pt-12">Grasp</span>
+            <span className="text-2xl font-bold text-white pt-12">eGrasp</span>
           </Link>
           <div className="space-y-2 ps-12">
             <p className="text-lg  text-white">Skill Sharing</p>
