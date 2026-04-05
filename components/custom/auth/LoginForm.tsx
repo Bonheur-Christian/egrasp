@@ -7,8 +7,10 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next13-progressbar";
 
 export default function LoginForm() {
+  const router =useRouter()
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -73,7 +75,9 @@ export default function LoginForm() {
       </div>
 
       <div className="flex justify-center pt-12">
-        <Button className="w-1/2 mx-auto py-6 rounded-md bg-primary hover:bg-primary/90 text-white text-lg cursor-pointer hover:scale-90">
+        <Button 
+        onClick={()=>router.push('/portal/communities')}
+        className="w-1/2 mx-auto py-6 rounded-md bg-primary hover:bg-primary/90 text-white text-lg cursor-pointer hover:scale-90">
           Login
         </Button>
       </div>
