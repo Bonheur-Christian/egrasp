@@ -19,6 +19,7 @@ export interface Community {
   description: string;
   avatar: string;
   category: Category;
+  image:string;
   members: number;
   type: "public" | "private";
   trending: boolean;
@@ -33,6 +34,7 @@ export const communities: Community[] = [
     description:
       "A community for frontend developers to share tips, tools, and trends.",
     avatar: "FD",
+    image: "/images/community-profile.jpeg",
     category: "Technology",
     members: 12400,
     type: "public",
@@ -45,6 +47,7 @@ export const communities: Community[] = [
     name: "Startup Founders",
     description: "Connect with fellow founders, share wins, and get advice.",
     avatar: "SF",
+    image: "/images/community-profile.jpeg",
     category: "Business",
     members: 8700,
     type: "public",
@@ -58,6 +61,7 @@ export const communities: Community[] = [
     description:
       "Everything football — match discussions, transfers, and more.",
     avatar: "FF",
+    image: "/images/community-profile.jpeg",
     category: "Sports",
     members: 23100,
     type: "public",
@@ -70,6 +74,7 @@ export const communities: Community[] = [
     name: "Indie Music Lovers",
     description: "Discover and share indie music from around the world.",
     avatar: "IM",
+    image: "/images/community-profile.jpeg",
     category: "Music",
     members: 6200,
     type: "public",
@@ -82,6 +87,7 @@ export const communities: Community[] = [
     name: "Fitness & Wellness",
     description: "Your daily dose of fitness motivation and health tips.",
     avatar: "FW",
+    image: "/images/community-profile.jpeg",
     category: "Health",
     members: 15800,
     type: "public",
@@ -94,6 +100,7 @@ export const communities: Community[] = [
     name: "PC Gamers United",
     description: "Reviews, builds, and multiplayer matchmaking for PC gamers.",
     avatar: "PG",
+    image: "/images/community-profile.jpeg",
     category: "Gaming",
     members: 19300,
     type: "public",
@@ -106,6 +113,7 @@ export const communities: Community[] = [
     name: "Learn & Grow",
     description: "Resources and study groups for lifelong learners.",
     avatar: "LG",
+    image: "/images/community-profile.jpeg",
     category: "Education",
     members: 9400,
     type: "public",
@@ -118,6 +126,7 @@ export const communities: Community[] = [
     name: "Digital Art Hub",
     description: "Showcase your digital art and get constructive feedback.",
     avatar: "DA",
+    image: "/images/community-profile.jpeg",
     category: "Art",
     members: 7100,
     type: "public",
@@ -130,6 +139,7 @@ export const communities: Community[] = [
     name: "Space Explorers",
     description: "Discuss the latest in space science and astronomy.",
     avatar: "SE",
+    image: "/images/community-profile.jpeg",
     category: "Science",
     members: 11200,
     type: "public",
@@ -142,6 +152,7 @@ export const communities: Community[] = [
     name: "Wanderlust Club",
     description: "Travel stories, itineraries, and hidden gems worldwide.",
     avatar: "WC",
+    image: "/images/community-profile.jpeg",
     category: "Travel",
     members: 14600,
     type: "public",
@@ -154,6 +165,7 @@ export const communities: Community[] = [
     name: "AI Researchers",
     description: "Cutting-edge AI research discussions and paper reviews.",
     avatar: "AR",
+    image: "/images/community-profile.jpeg",
     category: "Technology",
     members: 5300,
     type: "private",
@@ -166,6 +178,7 @@ export const communities: Community[] = [
     name: "E-Commerce Masters",
     description: "Strategies and tools for scaling your online store.",
     avatar: "EC",
+    image: "/images/community-profile.jpeg",
     category: "Business",
     members: 4100,
     type: "private",
