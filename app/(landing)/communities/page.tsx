@@ -1,84 +1,61 @@
-"use client"
+"use client";
 
-import { useState, useMemo, useRef, useEffect } from "react";
-import {
-  Search,
-  TrendingUp,
-  Users,
-  Clock,
-  Activity,
-  Plus,
-} from "lucide-react";
+import { useState, useMemo } from "react";
+import { Users, Clock, Activity, Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import { CommunityCard } from "@/components/custom/landingPage/CommunityCard";
 import { communities, CATEGORIES } from "@/constants/communities";
+import { CommunityType, Community } from "@/types/community";
 import Image from "next/image";
 
-type SortKey = "trending" | "members" | "newest" | "active";
-type TypeFilter = "all" | "public" | "private";
+type SortKey = "members" | "newest" | "active";
+type TypeFilter = "all" | CommunityType;
 
-const SORT_OPTIONS: { key: SortKey; label: string; icon: React.ElementType }[] =
-  [
-    { key: "trending", label: "Trending", icon: TrendingUp },
-    { key: "members", label: "Most Members", icon: Users },
-    { key: "newest", label: "Newest", icon: Clock },
-    { key: "active", label: "Most Active", icon: Activity },
-  ];
+const SORT_OPTIONS: { key: SortKey; label: string; icon: React.ElementType }[] = [
+  { key: "members", label: "Most Members", icon: Users },
+  { key: "newest", label: "Newest", icon: Clock },
+  { key: "active", label: "Most Active", icon: Activity },
+];
 
 export default function Communities() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [sort, setSort] = useState<SortKey>("trending");
+  const [sort, setSort] = useState<SortKey>("members");
   const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
-
-  const plugin = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
-  );
-
-  const trending = useMemo(() => communities.filter((c) => c.trending), []);
 
   const filtered = useMemo(() => {
     let list = [...communities];
+
     if (search) {
       const q = search.toLowerCase();
       list = list.filter(
-        (c) =>
+        (c: Community) =>
           c.name.toLowerCase().includes(q) ||
           c.description.toLowerCase().includes(q) ||
-          c.category.toLowerCase().includes(q),
+          c.category.toLowerCase().includes(q)
       );
     }
-    if (selectedCategory)
-      list = list.filter((c) => c.category === selectedCategory);
+
+    if (selectedCategory) list = list.filter((c) => c.category === selectedCategory);
     if (typeFilter !== "all") list = list.filter((c) => c.type === typeFilter);
 
     switch (sort) {
-      case "trending":
-        list.sort((a, b) => b.activity - a.activity);
-        break;
       case "members":
-        list.sort((a, b) => b.members - a.members);
+        list.sort((a, b) => b.membersCount - a.membersCount);
         break;
       case "newest":
         list.sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
         break;
       case "active":
-        list.sort((a, b) => b.activity - a.activity);
+        // If you don't have an activity field, fallback to membersCount
+        list.sort((a, b) => b.membersCount - a.membersCount);
         break;
     }
+
     return list;
   }, [search, selectedCategory, sort, typeFilter]);
 
@@ -97,14 +74,12 @@ export default function Communities() {
             Discover Communities
           </h1>
           <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
-            Find your people. Join communities that match your interests and
-            passions.
+            Find your people. Join communities that match your interests and passions.
           </p>
           <div className="relative max-w-xl mx-auto">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               placeholder="Search communities by name, topic, or keyword..."
-              className="pl-12 h-12 text-base bg-background border-0 shadow-lg"
+              className="pl-4 h-12 text-base bg-background border-0 shadow-lg"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -130,39 +105,6 @@ export default function Communities() {
       </section>
 
       <div className="max-w-[90%] mx-auto px-12 py-10">
-        {/* Trending Carousel */}
-        {!search && !selectedCategory && (
-          <section className="mb-12">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-primary" /> Trending
-                Communities
-              </h2>
-            </div>
-            <Carousel
-              plugins={[plugin.current]}
-              className="w-full"
-              onMouseEnter={plugin.current.stop}
-              onMouseLeave={plugin.current.reset}
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-            >
-              <CarouselContent className="-ml-4">
-                {trending.map((c) => (
-                  <CarouselItem key={c.id} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                    <CommunityCard community={c} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="hidden md:flex" />
-              <CarouselNext className="hidden md:flex" />
-            </Carousel>
-          </section>
-        )}
-
-        {/* Main content + sidebar */}
         <div className="flex gap-8">
           {/* Explore grid */}
           <div className="flex-1 min-w-0">
@@ -186,7 +128,7 @@ export default function Communities() {
             </div>
 
             <div className="flex gap-2 mb-6">
-              {(["all", "public", "private"] as TypeFilter[]).map((t) => (
+              {(["all", CommunityType.PUBLIC, CommunityType.PRIVATE] as TypeFilter[]).map((t) => (
                 <Badge
                   key={t}
                   variant={typeFilter === t ? "default" : "outline"}
@@ -207,7 +149,7 @@ export default function Communities() {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filtered.map((c) => (
+                {filtered.map((c: Community) => (
                   <CommunityCard key={c.id} community={c} />
                 ))}
               </div>
@@ -241,7 +183,7 @@ export default function Communities() {
                 Recommended
               </h3>
               <div className="space-y-3">
-                {communities.slice(0, 4).map((c) => (
+                {communities.slice(0, 4).map((c: Community) => (
                   <div key={c.id} className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-md bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0">
                       {c.avatar}
@@ -251,7 +193,7 @@ export default function Communities() {
                         {c.name}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        {(c.members / 1000).toFixed(1)}k members
+                        {(c.membersCount / 1000).toFixed(1)}k members
                       </p>
                     </div>
                   </div>
@@ -265,7 +207,11 @@ export default function Communities() {
               <p className="text-sm text-primary-foreground/80 mb-4">
                 Build a space for people who share your passion.
               </p>
-              <Button variant="secondary" size="lg" className="w-full gap-2 rounded-md cursor-pointer hover:scale-90 duration-300 transition-all py-4">
+              <Button
+                variant="secondary"
+                size="lg"
+                className="w-full gap-2 rounded-md cursor-pointer hover:scale-90 duration-300 transition-all py-4"
+              >
                 <Plus className="h-4 w-4" /> Create a New Community
               </Button>
             </div>
