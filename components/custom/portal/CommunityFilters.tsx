@@ -52,7 +52,7 @@ export default function CommunityFilters({
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className="gap-2 rounded-full border-dashed px-4"
+            className="gap-2 rounded-lg cursor-pointer hover:scale-95 duration-300 transition-all hover:text-white hover:bg-primary border border-primary bg-primary text-white px-6 py-5"
           >
             <FilterIcon className="h-4 w-4" />
             Filter
