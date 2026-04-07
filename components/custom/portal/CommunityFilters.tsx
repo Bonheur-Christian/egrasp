@@ -2,17 +2,19 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { CommunityType } from "@/types/community";
+import { FilterIcon } from "lucide-react";
+import { useState } from "react";
 
 export type Filters = {
   category: string;
-  trending: boolean | null;
-  type: string;
+  type: CommunityType | "All";
 };
 
 interface CommunityFiltersProps {
@@ -20,7 +22,6 @@ interface CommunityFiltersProps {
   filters: Filters;
   onChange: (filters: Filters) => void;
   className?: string;
-  defaultOpen?: boolean;
 }
 
 export default function CommunityFilters({
@@ -28,109 +29,109 @@ export default function CommunityFilters({
   filters,
   onChange,
   className,
-  defaultOpen = true,
 }: CommunityFiltersProps) {
+  const [open, setOpen] = useState(false);
+
+  const activeFiltersCount = (filters.category !== "All" ? 1 : 0) + (filters.type !== "All" ? 1 : 0);
+
+  const handleCategoryChange = (cat: string) => {
+    onChange({ ...filters, category: cat });
+  };
+
+  const handleTypeChange = (type: CommunityType | "All") => {
+    onChange({ ...filters, type });
+  };
+
+  const clearAll = () => {
+    onChange({ category: "All", type: "All" });
+  };
+
   return (
-    <div
-      className={cn(
-        "w-full rounded-xl border bg-white p-4 shadow-sm",
-        className
-      )}
-    >
-      <Accordion
-        type="multiple"
-        defaultValue={defaultOpen ? ["category", "trending", "type"] : []}
-        className="w-full space-y-3"
-      >
-        {/* CATEGORY */}
-        <AccordionItem value="category">
-          <AccordionTrigger className="text-sm font-semibold">
-            Category
-          </AccordionTrigger>
-
-          <AccordionContent>
-            <div className="flex flex-wrap gap-2 pt-2">
-              {["All", ...categories].map((cat) => (
+    <div className={cn("", className)}>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            className="gap-2 rounded-full border-dashed px-4"
+          >
+            <FilterIcon className="h-4 w-4" />
+            Filter
+            {activeFiltersCount > 0 && (
+              <span className="ml-1 rounded-full bg-primary px-1.5 py-0.5 text-xs text-primary-foreground">
+                {activeFiltersCount}
+              </span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-80 p-0" align="start">
+          <div className="p-4">
+            <div className="mb-2 flex items-center justify-between">
+              <h3 className="font-semibold">Filter communities</h3>
+              {activeFiltersCount > 0 && (
                 <Button
-                  key={cat}
+                  variant="ghost"
                   size="sm"
-                  variant={filters.category === cat ? "default" : "outline"}
-                  onClick={() => onChange({ ...filters, category: cat })}
-                  className={cn(
-                    "rounded-full px-4 transition",
-                    filters.category === cat &&
-                      "bg-primary text-white shadow"
-                  )}
+                  onClick={clearAll}
+                  className="h-auto p-0 text-xs text-muted-foreground hover:text-foreground"
                 >
-                  {cat}
+                  Clear all
                 </Button>
-              ))}
+              )}
             </div>
-          </AccordionContent>
-        </AccordionItem>
+            <Separator className="my-3" />
 
-        {/* TRENDING */}
-        <AccordionItem value="trending">
-          <AccordionTrigger className="text-sm font-semibold">
-            Trending
-          </AccordionTrigger>
-
-          <AccordionContent>
-            <div className="flex flex-wrap gap-2 pt-2">
-              {[
-                { label: "All", value: null },
-                { label: "Trending", value: true },
-                { label: "Not Trending", value: false },
-              ].map(({ label, value }) => (
-                <Button
-                  key={label}
-                  size="sm"
-                  variant={filters.trending === value ? "default" : "outline"}
-                  onClick={() => onChange({ ...filters, trending: value })}
-                  className={cn(
-                    "rounded-full px-4 transition",
-                    filters.trending === value &&
-                      "bg-primary text-white shadow"
-                  )}
-                >
-                  {label}
-                </Button>
-              ))}
+            {/* Category section */}
+            <div className="mb-4">
+              <div className="mb-2 text-sm font-medium">Category</div>
+              <div className="flex flex-wrap gap-2">
+                {["All", ...categories].map((cat) => (
+                  <Button
+                    key={cat}
+                    size="sm"
+                    variant={filters.category === cat ? "default" : "outline"}
+                    onClick={() => handleCategoryChange(cat)}
+                    className={cn(
+                      "h-7 rounded-full px-3 text-xs",
+                      filters.category === cat &&
+                        "bg-primary text-primary-foreground"
+                    )}
+                  >
+                    {cat}
+                  </Button>
+                ))}
+              </div>
             </div>
-          </AccordionContent>
-        </AccordionItem>
 
-        {/* TYPE */}
-        <AccordionItem value="type">
-          <AccordionTrigger className="text-sm font-semibold">
-            Type
-          </AccordionTrigger>
+            <Separator className="my-3" />
 
-          <AccordionContent>
-            <div className="flex flex-wrap gap-2 pt-2">
-              {[
-                { label: "All", value: "All" },
-                { label: "Public", value: "public" },
-                { label: "Private", value: "private" },
-              ].map(({ label, value }) => (
-                <Button
-                  key={value}
-                  size="sm"
-                  variant={filters.type === value ? "default" : "outline"}
-                  onClick={() => onChange({ ...filters, type: value })}
-                  className={cn(
-                    "rounded-full px-4 capitalize transition",
-                    filters.type === value &&
-                      "bg-primary text-white shadow"
-                  )}
-                >
-                  {label}
-                </Button>
-              ))}
+            {/* Type section */}
+            <div className="mb-2">
+              <div className="mb-2 text-sm font-medium">Type</div>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { label: "All", value: "All" },
+                  { label: "Public", value: CommunityType.PUBLIC },
+                  { label: "Private", value: CommunityType.PRIVATE },
+                ].map(({ label, value }) => (
+                  <Button
+                    key={value}
+                    size="sm"
+                    variant={filters.type === value ? "default" : "outline"}
+                    onClick={() => handleTypeChange(value as CommunityType | "All")}
+                    className={cn(
+                      "h-7 rounded-full px-3 text-xs capitalize",
+                      filters.type === value &&
+                        "bg-primary text-primary-foreground"
+                    )}
+                  >
+                    {label}
+                  </Button>
+                ))}
+              </div>
             </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+          </div>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }

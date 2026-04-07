@@ -1,8 +1,8 @@
-import { Users, Lock, LogOut } from "lucide-react";
-import { Button } from "@/components/ui/button";
+"use client"
+import { Users, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import type { Community } from "@/constants/communities";
 import Image from "next/image";
+import { Community } from "@/types/community";
 
 function formatCount(n: number) {
   return n >= 1000
@@ -10,32 +10,20 @@ function formatCount(n: number) {
     : String(n);
 }
 
-// Updated Props to be more flexible
 type CommunityCardProps = {
   community: Community;
-
-
 };
 
-export function CommunityCard({
-  community,
- 
-
- 
-}: CommunityCardProps) {
-  // Use whichever field is available (your data uses memberCount/sector)
-  const displayMembers = community.members  ?? 0;
-  const displayCategory = community.category  ?? "General";
-
-  
-
+export function CommunityCard({ community }: CommunityCardProps) {
   const isPrivate = community.type === "private";
 
   return (
     <div className="group rounded-xl border border-border bg-card overflow-hidden">
+      
+      {/* Cover Image */}
       <div className="h-28 overflow-hidden relative">
         <Image
-          src={community.image}
+          src={community.coverImage || "/images/community.png"}
           alt={community.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
@@ -45,52 +33,44 @@ export function CommunityCard({
       </div>
 
       <div className="p-4 -mt-6 relative">
-        <div className="w-12 h-12 rounded-md bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-md border-2 border-card">
-          {community.avatar}
+        
+        {/* Avatar */}
+        <div className="w-12 h-12 rounded-md overflow-hidden border-2 border-card shadow-md">
+          <Image
+            src={community.avatar || "/images/community-profile.jpeg"}
+            alt={community.name}
+            width={48}
+            height={48}
+            className="w-full h-full object-cover"
+          />
         </div>
 
+        {/* Name + Private icon */}
         <h3 className="font-semibold text-foreground mt-2 text-base leading-tight flex items-center gap-1.5">
           {community.name}
-          {isPrivate && <Lock className="h-3.5 w-3.5 text-muted-foreground" />}
+          {isPrivate && (
+            <Lock className="h-3.5 w-3.5 text-muted-foreground" />
+          )}
         </h3>
 
+        {/* Description */}
         <p className="text-muted-foreground text-sm mt-1 line-clamp-2">
           {community.description}
         </p>
 
+        {/* Category + Members */}
         <div className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-3">
             <Badge variant="secondary" className="text-xs">
-              {displayCategory}
+              {community.category}
             </Badge>
+
             <span className="text-xs text-muted-foreground flex items-center gap-1">
-              <Users className="h-3 w-3" /> {formatCount(displayMembers)}
+              <Users className="h-3 w-3" />
+              {formatCount(community.membersCount)}
             </span>
           </div>
         </div>
-
-        {/* <div className="flex justify-center mt-4">
-          {isMember || isJoined ? (
-            <Button
-              onClick={handleLeave}
-              variant="destructive"
-              size="lg"
-              className="px-10 rounded-md hover:scale-95 transition-all flex items-center gap-2"
-            >
-              <LogOut className="h-4 w-4" />
-              Leave
-            </Button>
-          ) : (
-            <Button
-              onClick={handleJoin}
-              className="px-12 rounded-md cursor-pointer hover:scale-90 duration-300 transition-all border border-primary"
-              size="lg"
-              variant={isPrivate ? "outline" : "default"}
-            >
-              {isPrivate ? "Request to Join" : "Join"}
-            </Button>
-          )}
-        </div> */}
       </div>
     </div>
   );
